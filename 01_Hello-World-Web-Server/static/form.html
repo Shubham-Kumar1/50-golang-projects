@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Submit Information - Go Web Server</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+        .container {
+            background-color: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 500px;
+            margin: 1rem;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 2rem;
+            font-size: 2rem;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #34495e;
+            font-weight: 500;
+        }
+        input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+            box-sizing: border-box;
+        }
+        input:focus {
+            outline: none;
+            border-color: #3498db;
+        }
+        .submit-btn {
+            background-color: #3498db;
+            color: white;
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            width: 100%;
+            transition: transform 0.2s, background-color 0.2s;
+        }
+        .submit-btn:hover {
+            background-color: #2980b9;
+            transform: translateY(-2px);
+        }
+        .back-btn {
+            display: inline-block;
+            margin-top: 1rem;
+            color: #3498db;
+            text-decoration: none;
+            font-size: 0.9rem;
+        }
+        .back-btn:hover {
+            text-decoration: underline;
+        }
+        .error {
+            color: #e74c3c;
+            font-size: 0.9rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Submit Information</h1>
+        <form action="/form" method="POST" id="infoForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" name="name" required 
+                       placeholder="Enter your full name">
+                <div class="error" id="nameError">Please enter a valid name</div>
+            </div>
+            
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input type="number" id="age" name="age" required 
+                       placeholder="Enter your age" min="1" max="120">
+                <div class="error" id="ageError">Please enter a valid age (1-120)</div>
+            </div>
+
+            <button type="submit" class="submit-btn">Submit Information</button>
+        </form>
+        
+        <a href="/" class="back-btn">← Back to Home</a>
+    </div>
+
+    <script>
+        document.getElementById('infoForm').addEventListener('submit', function(e) {
+            const name = document.getElementById('name').value;
+            const age = document.getElementById('age').value;
+            const nameError = document.getElementById('nameError');
+            const ageError = document.getElementById('ageError');
+            
+            let isValid = true;
+            
+            // Name validation
+            if (name.length < 2 || !/^[a-zA-Z\s]*$/.test(name)) {
+                nameError.style.display = 'block';
+                isValid = false;
+            } else {
+                nameError.style.display = 'none';
+            }
+            
+            // Age validation
+            if (age < 1 || age > 120) {
+                ageError.style.display = 'block';
+                isValid = false;
+            } else {
+                ageError.style.display = 'none';
+            }
+            
+            if (!isValid) {
+                e.preventDefault();
+            }
+        });
+    </script>
+</body>
+
+</html>
