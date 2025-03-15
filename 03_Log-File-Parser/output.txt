@@ -1,0 +1,40 @@
+{
+  "client_ip": "192.168.1.100",
+  "level": "INFO",
+  "message": "Success: User profile retrieved",
+  "method": "GET",
+  "path": "/api/users",
+  "timestamp": "2024-03-15T10:45:30.123Z"
+}
+{
+  "client_ip": "192.168.1.101",
+  "level": "ERROR",
+  "message": "Failed: Invalid credentials",
+  "method": "POST",
+  "path": "/api/login",
+  "timestamp": "2024-03-15T10:45:31.456Z"
+}
+{
+  "client_ip": "192.168.1.102",
+  "level": "WARN",
+  "message": "High latency detected",
+  "method": "PUT",
+  "path": "/api/data",
+  "timestamp": "2024-03-15T10:45:32.789Z"
+}
+{
+  "client_ip": "192.168.1.103",
+  "level": "DEBUG",
+  "message": "Cache miss for key: user_123",
+  "method": "GET",
+  "path": "/api/cache",
+  "timestamp": "2024-03-15T10:45:33.012Z"
+}
+{
+  "client_ip": "192.168.1.104",
+  "level": "INFO",
+  "message": "User logout successful",
+  "method": "DELETE",
+  "path": "/api/session",
+  "timestamp": "2024-03-15T10:45:34.345Z"
+}

@@ -1,0 +1,5 @@
+2024-03-15T10:45:30.123Z [INFO] 192.168.1.100 - GET /api/users Success: User profile retrieved
+2024-03-15T10:45:31.456Z [ERROR] 192.168.1.101 - POST /api/login Failed: Invalid credentials
+2024-03-15T10:45:32.789Z [WARN] 192.168.1.102 - PUT /api/data High latency detected
+2024-03-15T10:45:33.012Z [DEBUG] 192.168.1.103 - GET /api/cache Cache miss for key: user_123
+2024-03-15T10:45:34.345Z [INFO] 192.168.1.104 - DELETE /api/session User logout successful 
