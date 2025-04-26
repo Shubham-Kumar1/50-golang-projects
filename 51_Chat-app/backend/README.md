@@ -1,89 +1,122 @@
-# Chat App Backend
+# Chat Application Backend
 
-A WebSocket-based chat application backend built with Go.
+A robust real-time chat application backend built with Go, featuring WebSocket communication, structured logging, and clean architecture.
 
 ## Features
 
-- Real-time WebSocket communication
-- Configurable environment settings
-- Structured logging
-- Graceful shutdown
-- Connection pooling
+- Real-time bidirectional communication using WebSockets
+- Structured logging with different log levels
+- Clean architecture with separation of concerns
+- Configuration management
+- Client connection pooling
+- Message broadcasting
+- User presence notifications
+
+## Project Structure
+
+```
+backend/
+├── config/
+│   └── config.go         # Configuration management
+├── logger/
+│   └── logger.go         # Structured logging implementation
+├── websocket/
+│   ├── client.go         # WebSocket client handling
+│   ├── message.go        # Message type definitions
+│   └── pool.go           # Connection pool management
+└── main.go               # Application entry point
+```
 
 ## Prerequisites
 
 - Go 1.21 or higher
 - Git
 
-## Development Setup
+## Setup and Installation
 
 1. Clone the repository:
-```bash
-git clone https://github.com/Shubham-Kumar1/chat-app.git
-cd chat-app/backend
-```
+   ```bash
+   git clone <repository-url>
+   cd chat-app/backend
+   ```
 
 2. Install dependencies:
-```bash
-go mod download
+   ```bash
+   go mod download
+   ```
+
+3. Run the application:
+   ```bash
+   go run main.go
+   ```
+
+The server will start on `localhost:8080` by default.
+
+## Configuration
+
+The application can be configured using environment variables:
+
+- `PORT`: Server port (default: 8080)
+- `LOG_LEVEL`: Logging level (debug, info, warn, error) (default: info)
+
+## WebSocket API
+
+### Connection
+
+Connect to the WebSocket server:
+```
+ws://localhost:8080/ws
 ```
 
-3. Create a `.env` file:
-```bash
-cp .env.example .env
+### Message Types
+
+1. System Messages (Type: 1)
+   - New user connection notification
+   - User disconnection notification
+
+2. Chat Messages (Type: 2)
+   - Regular chat messages between users
+
+### Message Format
+
+```json
+{
+    "type": 1,
+    "body": "message content"
+}
 ```
 
-4. Run the development server:
-```bash
-go run main.go
-```
+## Architecture
 
-## Environment Variables
+### Components
 
-- `PORT`: Server port (default: 9090)
-- `WS_PATH`: WebSocket endpoint path (default: /ws)
-- `LOG_LEVEL`: Logging level (debug, info, warn, error)
-- `MAX_CONNECTIONS`: Maximum number of WebSocket connections
-- `PING_INTERVAL`: WebSocket ping interval in seconds
-- `PONG_WAIT`: WebSocket pong wait time in seconds
-- `WRITE_WAIT`: WebSocket write wait time in seconds
-- `ALLOWED_ORIGINS`: Allowed CORS origins
+1. **WebSocket Pool**
+   - Manages client connections
+   - Handles client registration/unregistration
+   - Broadcasts messages to all connected clients
 
-## Project Structure
+2. **Client Handler**
+   - Manages individual WebSocket connections
+   - Handles message reading and writing
+   - Implements connection lifecycle
 
-```
-backend/
-├── config/         # Configuration management
-├── logger/         # Logging utilities
-├── websocket/      # WebSocket implementation
-├── main.go         # Application entry point
-├── go.mod          # Go module file
-└── README.md       # This file
-```
+3. **Logger**
+   - Provides structured logging
+   - Supports multiple log levels
+   - Thread-safe logging operations
 
-## API Endpoints
+4. **Configuration**
+   - Centralized configuration management
+   - Environment variable support
+   - Default configuration values
 
-### WebSocket Connection
+## Error Handling
 
-```
-ws://localhost:9090/ws
-```
-
-## Development
-
-To run the server in development mode with hot reload:
-
-```bash
-go run main.go
-```
-
-## Logging
-
-The application uses structured logging with different levels:
-- DEBUG: Detailed debugging information
-- INFO: General operational information
-- WARN: Warning messages
-- ERROR: Error messages
+The application implements comprehensive error handling:
+- Connection errors
+- Message parsing errors
+- Configuration errors
+- Logging errors
 
 ## Contributing
 
@@ -91,4 +124,8 @@ The application uses structured logging with different levels:
 2. Create your feature branch
 3. Commit your changes
 4. Push to the branch
-5. Create a new Pull Request 
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
